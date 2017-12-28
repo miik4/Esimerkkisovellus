@@ -1,0 +1,67 @@
+﻿<dx:DXWindow x:Class="Esimerkkisovellus.Views.EsimerkkisovellusView"
+            xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"  
+            xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"  
+            xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"  
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+            xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+            xmlns:local="clr-namespace:Esimerkkisovellus.ViewModels"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+            mc:Ignorable="d"
+            d:DataContext="{d:DesignInstance local:PrototyyppiSovellusViewModel}"
+            DataContext="{dxmvvm:ViewModelSource local:PrototyyppiSovellusViewModel}"
+            Title="Prototyyppisovellus"
+            Height="450" Width="525">
+
+    <dxlc:LayoutControl Orientation="Vertical">
+        <dxlc:LayoutGroup Orientation="Vertical" View="GroupBox" Header="Lisää uusi tuote">
+            <dxlc:LayoutItem Label="Tuoteen nimi" LabelPosition="Top">
+                <dxe:TextEdit Text="{Binding TuoteNimi, UpdateSourceTrigger=PropertyChanged}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Hinta" LabelPosition="Top">
+                <dxe:TextEdit Text="{Binding TuoteHinta, UpdateSourceTrigger=PropertyChanged}"/>
+            </dxlc:LayoutItem>
+            <dxb:BarManager VerticalAlignment="Top" HorizontalAlignment="Left"
+                            AllowCustomization="False" Margin="0,10,0,0">
+                <dxb:BarManager.Bars>
+                    <dxb:Bar AllowCustomizationMenu="False" AllowCollapse="False" AllowQuickCustomization="False" ShowDragWidget="False">
+                        <dxb:BarButtonItem Content="Lisää"
+                                           Command="{Binding LisaaTuoteCommand}"
+                                           LargeGlyph="{dx:DXImage Image=Add_32x32.png}" 
+                                           Glyph="{dx:DXImage Image=Add_16x16.png}"/>
+                        <dxb:BarButtonItem Content="Poista"
+                                           Command="{Binding PoistaTuoteCommand}"
+                                           LargeGlyph="{dx:DXImage Image=Delete_32x32.png}" 
+                                           Glyph="{dx:DXImage Image=Delete_16x16.png}"/>
+                        <dxb:BarButtonItem Content="Tallenna"
+                                           Command="{Binding TallennaCommand}"
+                                           LargeGlyph="{dx:DXImage Image=Save_32x32.png}" 
+                                           Glyph="{dx:DXImage Image=Save_16x16.png}"/>
+                    </dxb:Bar>
+                </dxb:BarManager.Bars>
+            </dxb:BarManager>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup Header="Tuotteet" View="GroupBox">
+            <dxg:GridControl ItemsSource="{Binding Tuotteet, UpdateSourceTrigger=PropertyChanged}"
+                             SelectedItem="{Binding SelectedTuote}">
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn Header="Id"
+                                    FieldName="Id"
+                                    MaxWidth="30"
+                                    AllowEditing="False"/>
+                    <dxg:GridColumn Header="Tuote"
+                                    FieldName="Nimi"/>
+                    <dxg:GridColumn Header="Hinta"
+                                    FieldName="Hinta"/>
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.View>
+                    <dxg:TableView ShowGroupPanel="False"/>
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</dx:DXWindow>
+
